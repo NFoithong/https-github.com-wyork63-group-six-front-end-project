@@ -48,7 +48,7 @@
                             getAir (lat, lon, city);
                         });
                     } else {
-                        alert('Error: No city Found');
+                        alert('Error: No city Found. Please check spelling and try again.');
                     }
                 })
                 .catch(function(error) {
@@ -61,41 +61,98 @@
         var getAir = function(lat, lon, city) {
             var apiKey2 = '54cd8f0a-9f51-43d4-ad67-cb829c5298e2';
             var apiUrl2 = 'https://api.airvisual.com/v2/nearest_city?lat=' + lat + '&lon=' + lon + '&key=' + apiKey2;
-            fetch(apiUrl2)
+            fetch(apiUrl2) 
+
+            // option 2 below
+                // .then((response) => {
+                //     if (response.ok) {
+                //         return response.json();
+                //     }
+                //     else {
+                //         throw new Error("NETWORK NOT RESPONDING");
+                //     }
+                // })
+                // .then(data => displayAir(data))
+                // .catch((error) => console.error("Fetch Error:", error))
+                // console.log(data);
+                // };
+        // end option 2 
+
+        //option 1 pt 1 
+                // below code returns success and city name but posts undefined 
                 .then(function(response) {
+                    if (response.ok) {
                     response.json().then(function(data){
                         // var current = data;
                         displayAir(data, city)
                     });
+                } else {
+                    alert("Error: Could not Connect. Please check spelling and try again")
+                }
                 });  
-        };
+        // option 1 pt 1 end
+
+        // option 2 part 2 below
+        // var displayAir = function(data) {
+        //     var air = data;
+        //     var aquiusDiv = document.getElementById("results");
+
+        //     // view air quality
+        //     var newAir = air.aquius;
+        //     var currentAirEl = document.createElement('article');
+        //     article.innerHTML = newAir
+        //     aquiusDiv.appendChild(currentAirEl);
+
+        //     // view city 
+        //     var city = air.city;
+        //     var cityEl = document.createElement('p');
+        //     article.innerHTML = city;
+        //     aquiusDiv.appendChild(cityEl);   
+        // }
+
+        // option 2 part 2 end 
+
+        // option 1 part 2 below
         
         var displayAir = function(data, city) {
             console.log(data);
 
-            //clear results
+        //     //clear results
             resultsContainerEl.textContent=''
 
-            // new container for info
+        //     // new container for info
             var currentAirEl = document.createElement('article');
             currentAirEl.id = 'current';
             currentAirEl.classList = ''
 
-            // information to add to this div
+        //     // information to add to this div
             var airQualityEl = document.createElement('p')
 
-            // the info from the data here should show up but is showing up as undefined
-            // data itself is showing up as [object Object]
-            // means that it is not being parsed from JSON appropriately - but where is it going wrong? 
-            airQualityEl.innerHTML = 'Quality of Air in ' + city + data + 'AQI';
+        //     // the info from the data here should show up but is showing up as undefined
+        //     // data itself is showing up as [object Object]
+        //     // means that it is not being parsed from JSON appropriately - but where is it going wrong? 
+            airQualityEl.innerHTML = 'The AQI in ' + city +' is ' + data.aqius;
 
-            //append there to currentAir section
+        //     //append there to currentAir section
             currentAirEl.appendChild(airQualityEl);
 
             resultsContainerEl.appendChild(currentAirEl);
-        }
+        }}
 
+        // function to update color of box depending on air quality - add in once function is working 
+            // var airColorEl = document.querySelector('#results');
+            // if (parseInt(data.aquius) < 50 ) {
+            //     airColorEl.classList = 'good';
+            // }
+            // else if (parseInt(data.aquius) > 150) {
+            //     airColorEl.classList = 'unhealthy'
+            // }
+            // else {
+            //     airColorEl.classList = 'moderate'
+            // }
+        // }
 
+    
         
         
         searchFormEl.addEventListener('submit', formSubmitHandler);
