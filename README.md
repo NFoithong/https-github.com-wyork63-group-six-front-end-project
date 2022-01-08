@@ -7,3 +7,5 @@ Natthaphon, Shafat, and Will's group project
 - @srahman9
 - @wyork63
 
+## User Story 
+As someone who is sensitive to the air quality, I need to be able to see if I can enjoy a new beverage outside. 

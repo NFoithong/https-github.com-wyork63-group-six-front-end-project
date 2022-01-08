@@ -110,47 +110,8 @@
             else {
                 airColorEl.classList = 'moderate'
             }
-        }
-
-            
+        }    
     }
-        // end option 1
-
-        // function to update color of box depending on air quality - add in once function is working 
-            
-
-        // option 2 below
-                // .then((response) => {
-                //     if (response.ok) {
-                //         return response.json();
-                //     }
-                //     else {
-                //         throw new Error("NETWORK NOT RESPONDING");
-                //     }
-                // })
-                // .then(data => displayAir(data))
-                // .catch((error) => console.error("Fetch Error:", error))
-                // console.log(data);
-                // };
-
-         // option 2 part 2 below
-        // var displayAir = function(data) {
-        //     var air = data;
-        //     var aquiusDiv = document.getElementById("results");
-
-        //     // view air quality
-        //     var newAir = air.aquius;
-        //     var currentAirEl = document.createElement('article');
-        //     article.innerHTML = newAir
-        //     aquiusDiv.appendChild(currentAirEl);
-
-        //     // view city 
-        //     var city = air.city;
-        //     var cityEl = document.createElement('p');
-        //     article.innerHTML = city;
-        //     aquiusDiv.appendChild(cityEl);   
-        // }
-        // option 2 part 2 end 
 
     
-        searchFormEl.addEventListener('submit', formSubmitHandler);
+searchFormEl.addEventListener('submit', formSubmitHandler);

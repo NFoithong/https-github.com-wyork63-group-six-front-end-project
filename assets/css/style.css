@@ -1,4 +1,21 @@
-#results img{
+#drink img{
   width: 30%;
   height: auto;
 };
+#results {
+    background-color: goldenrod;
+}
+
+
+/** change color depending on result of AQIUS **/
+#results.good {
+background-color: green;
+}
+
+#results.moderate {
+background-color: yellow;
+}
+
+#results.unhealthy {
+background-color: red;
+}
