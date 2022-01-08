@@ -1,3 +1,7 @@
+#drink img{
+  width: 30%;
+  height: auto;
+};
 #results {
     background-color: goldenrod;
 }
