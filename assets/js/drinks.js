@@ -1,4 +1,4 @@
-function getRandomCocktail() {
+function getDrinks() {
   fetch("https://www.thecocktaildb.com/api/json/v1/1/random.php")
     .then(function (response) {
       if (response.status !== 200) {
@@ -11,7 +11,7 @@ function getRandomCocktail() {
       // Examine the text in the response
       response.json().then(function (data) {
         console.log(data);
-        displayRandomCocktail(data);
+        displayDrink(data);
       });
     })
     .catch(function (err) {
@@ -19,20 +19,18 @@ function getRandomCocktail() {
     });
 }
 
-getRandomCocktail();
-
-function displayRandomCocktail(cocktail) {
+function displayDrink(cocktail) {
   console.log(cocktail.drinks[0]);
 
   //Displays drink name
-  let drinkSection = document.querySelector("#drink-section");
-  let drinkName = document.createElement("h2");
+  const drinkSection = document.querySelector("#drink");
+  const drinkName = document.createElement("h3");
   drinkName.innerHTML = cocktail.drinks[0].strDrink;
 
   drinkSection.appendChild(drinkName);
 
   //Displays drink image
-  let img = document.createElement("img");
+  const img = document.createElement("img");
   img.src = cocktail.drinks[0].strDrinkThumb;
   drinkSection.appendChild(img);
 
@@ -43,14 +41,21 @@ function displayRandomCocktail(cocktail) {
       break;
     }
 
-    let ingredient = document.createElement("ol");
+    const ingredient = document.createElement("ol");
     ingredient.innerHTML =
       cocktail.drinks[0][`strMeasure${i}`] +
       ": " +
       cocktail.drinks[0][`strIngredient${i}`];
     drinkSection.appendChild(ingredient);
   }
-  let instruction = document.createElement("ol");
+  const instruction = document.createElement("ol");
   instruction.innerHTML = cocktail.drinks[0].strInstructions;
   drinkSection.appendChild(instruction);
 }
+
+//var searchFormEl = document.querySelector('#search-form');
+const button = document.getElementById("#submit");
+
+searchFormEl.addEventListener("submit", getDrinks);
+
+//getDrinks();
