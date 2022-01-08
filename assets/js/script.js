@@ -15,6 +15,6 @@ var formSubmitHandler = function(event) {
 
 var getLatLon = function(city) {
     //api key for iqAir 
-    var apiKey = "54cd8f0a-9f51-43d4-ad67-cb829c5298e2"
+    var apiKey = "6e1e1837-696e-464e-8f5b-ffa2bc286293"
     var apiUrl = ""
 }
