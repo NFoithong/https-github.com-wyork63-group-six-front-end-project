@@ -1,25 +1,3 @@
-// var searchFormEl = document.querySelector('#search-form')
-// var resultsContainerEl = document.querySelector('#results')
-
-// var formSubmitHandler = function(event) {
-//     event.preventDefault();
-//     var city = cityInputEl.value.trim();
-//     if (city) {
-//         getLatLon(city);
-//         cityINputEl.value = ''
-//     }
-//     else {
-//         alert('Please enter the name of a city');
-//     }
-// };
-
-// var getLatLon = function(city) {
-//     //api key for iqAir 
-//     var apiKey = "54cd8f0a-9f51-43d4-ad67-cb829c5298e2"
-//     var apiUrl = ""
-// }
-
-
 // will need to have two submit boxes one for the city and one for the state
 // the submit boxes will store a variable that will then be pushed into the apikey
 // once the information is pushed through it will display the airquality on the screen 
@@ -67,14 +45,16 @@ var getLatLon = function(city) {
                     var lat = data.coord.lat;
                     var lon = data.coord.lon;
                     getAir(lat, lon, city);
+                    console.log(lat, lon);
                 });
             } else {
-                alert('Error: No city Found');
+                alert('Error: No city Found. Please check spelling and try again.');
             }
         })
         .catch(function(error) {
             alert('Unable to Connect')
         });
+
 };
 
 // lat and lon are taken and plugged into air api 
@@ -83,40 +63,52 @@ var getAir = function(lat, lon, city) {
     var apiKey2 = '54cd8f0a-9f51-43d4-ad67-cb829c5298e2';
     var apiUrl2 = 'https://api.airvisual.com/v2/nearest_city?lat=' + lat + '&lon=' + lon + '&key=' + apiKey2;
     fetch(apiUrl2)
-        .then(function(response) {
-            response.json().then(function(data) {
-                // var current = data;
-                displayAir(data, city)
+
+    //option 1 pt 1 
+    // below code returns success and city name but posts undefined 
+    .then(function(response) {
+        if (response.ok) {
+            response.json().then(function(apiresponse) {
+                displayAir(apiresponse, city)
             });
-        });
-};
+        } else {
+            alert("Error: Could not Connect. Please check spelling and try again")
+        }
+    });
 
-var displayAir = function(data, city) {
-    console.log(data);
+    var displayAir = function(apiresponse, city) {
+        console.log((apiresponse));
 
-    //clear results
-    resultsContainerEl.textContent = ''
+        //     //clear results
+        resultsContainerEl.textContent = ''
 
-    // new container for info
-    var currentAirEl = document.createElement('article');
-    currentAirEl.id = 'current';
-    currentAirEl.classList = ''
+        //     // new container for info
+        var currentAirEl = document.createElement('article');
+        currentAirEl.id = 'current';
+        currentAirEl.classList = ''
 
-    // information to add to this div
-    var airQualityEl = document.createElement('p')
+        //     // information to add to this div
+        var airQualityEl = document.createElement('p')
 
-    // the info from the data here should show up but is showing up as undefined
-    // data itself is showing up as [object Object]
-    // means that it is not being parsed from JSON appropriately - but where is it going wrong? 
-    airQualityEl.innerHTML = 'Quality of Air in ' + city + data + 'AQI';
+        //     // the info from the data here should show up but is showing up as undefined
+        //     // data itself is showing up as [object Object]
+        //     // means that it is not being parsed from JSON appropriately - but where is it going wrong? 
+        airQualityEl.innerHTML = 'Right now the AQI in ' + city + ' is ' + apiresponse.data.current.pollution.aqius;
 
-    //append there to currentAir section
-    currentAirEl.appendChild(airQualityEl);
+        //     //append there to currentAir section
+        currentAirEl.appendChild(airQualityEl);
 
-    resultsContainerEl.appendChild(currentAirEl);
+        resultsContainerEl.appendChild(currentAirEl);
+        var airColorEl = document.querySelector('#results');
+        if (parseInt(apiresponse.data.current.pollution.aqius) < 50) {
+            airColorEl.classList = 'good';
+        } else if (parseInt(apiresponse.data.current.pollution.aqius) > 150) {
+            airColorEl.classList = 'unhealthy'
+        } else {
+            airColorEl.classList = 'moderate'
+        }
+    }
 }
-
-
 
 
 searchFormEl.addEventListener('submit', formSubmitHandler);
