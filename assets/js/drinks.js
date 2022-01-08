@@ -22,6 +22,11 @@ function getDrinks() {
 function displayDrink(cocktail) {
   console.log(cocktail.drinks[0]);
 
+  //clears previous drink
+  const resultsContainerEl = document.querySelector('#drink');
+
+  resultsContainerEl.textContent=''
+
   //Displays drink name
   const drinkSection = document.querySelector("#drink");
   const drinkName = document.createElement("h3");
@@ -53,9 +58,8 @@ function displayDrink(cocktail) {
   drinkSection.appendChild(instruction);
 }
 
-//var searchFormEl = document.querySelector('#search-form');
+
 const button = document.getElementById("#submit");
 
 searchFormEl.addEventListener("submit", getDrinks);
 
-//getDrinks();
