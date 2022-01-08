@@ -5,8 +5,7 @@
     box-sizing: border-box;
 }
 
-
-/* html {
+html {
     font-family: "Open Sans", Arial, sans-serif;
     color: #ffffff;
 }
@@ -61,43 +60,4 @@ h1.title {
     100% {
         background-position: 0 50%;
     }
-} */
-
-#drink img {
-    width: 30%;
-    height: auto;
-}
-
-;
-#results {
-    /* background-color: goldenrod; */
-    padding: 0 50px;
-}
-
-
-/** change color depending on result of AQIUS **/
-
-#results.good {
-    /* background-color: green; */
-    color: #00DF59;
-    font-size: 3rem;
-    text-shadow: 2px 2px 5px black;
-    /* background-color: white; */
-    padding: 0 50px;
-}
-
-#results.moderate {
-    color: #FFDC00;
-    font-size: 3rem;
-    text-shadow: 2px 2px 5px black;
-    /* background-color: white; */
-    padding: 0 50px;
-}
-
-#results.unhealthy {
-    color: #f91C1C;
-    font-size: 3rem;
-    text-shadow: 2px 2px 5px black;
-    /* background-color: white; */
-    padding: 0 50px;
 }

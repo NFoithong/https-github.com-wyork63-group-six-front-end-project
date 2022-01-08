@@ -1,33 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"
-    href="./assets/css/style.css" />
     <title>WNS Dashboard</title>
-</head>
-<body>
-    <header>
-        <h1 class='title'>WNS Dashboard</h1>
-    </header>
-    <main>
-        <div>
-            <form id='search-form'>
-                <div>
-                    <label><h2>Enter your City to check if the air quality is good enough to enjoy a beverage outside!</h2></label>
-                    <input name='city' id='city-input' type='text' class='tbd1' placeholder='Enter City'/>
-                </div>
-                <br>
-                <button type='submit' class=''>Submit</button>
-            </form>
-            <div id='results' class=''>Results will dislay here</div>
-            <div id="drink"></div>
-        </div>
-    </main>
 
-    <script src =./assets/js/script.js></script>
-    <script src =./assets/js/drinks.js></script>
+    <!-- Insert CSS framework -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" /> -->
+    <!-- <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" /> -->
+    <!-- <link rel="stylesheet" href="https://assets.ubuntu.com/v1/vanilla-framework-version-2.37.0.min.css" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="./assets/css/index.css" />
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+    <div class="columns">
+        <div class="column">
+            <div id="dashBoard">
+                <div class="is-flex-wrap-wrap">
+                    <div class='brand'>
+                        <h1>WNS Dashboard</h1>
+                        <p class="air-quality">Air Quality Application</p>
+                    </div>
+                    <br>
+                    <section>
+                        <div>
+
+                            <form id='search-form'>
+                                <div>
+                                    <label class="label">Enter your City to check if the air quality is good enough to enjoy a beverage outside!</label>
+                                    <!-- <i class="p-icon--search"></i> -->
+                                    <input name='city' id='city-input' type='text' class='tbd1 input is-normal' placeholder='Enter City' />
+                                </div>
+                                <br>
+                                <button type='submit' class='button is-rounded'>Search</button>
+                            </form>
+                            <br>
+
+                        </div>
+
+                    </section>
+
+                    <div id='results'>
+                        <div id='location'></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+
+            <!-- start new section -->
+            <div class="is-flex-wrap-wrap">
+
+                <div id="drink"></div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/drinks.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="./assets/js/intro.js"></script>
+
 </body>
+
 </html>
