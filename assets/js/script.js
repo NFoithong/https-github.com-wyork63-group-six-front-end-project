@@ -46,6 +46,7 @@
                             var lat = data.coord.lat;
                             var lon = data.coord.lon;
                             getAir (lat, lon, city);
+                            console.log(lat,lon);
                         });
                     } else {
                         alert('Error: No city Found. Please check spelling and try again.');
@@ -54,6 +55,7 @@
                 .catch(function(error) {
                     alert('Unable to Connect')
                 });
+                
         };
         
         // lat and lon are taken and plugged into air api 
@@ -63,7 +65,61 @@
             var apiUrl2 = 'https://api.airvisual.com/v2/nearest_city?lat=' + lat + '&lon=' + lon + '&key=' + apiKey2;
             fetch(apiUrl2) 
 
-            // option 2 below
+        //option 1 pt 1 
+                // below code returns success and city name but posts undefined 
+                .then(function(response) {
+                    if (response.ok) {
+                    response.json().then(function(apiresponse){
+                        displayAir(apiresponse, city)
+                    });
+                } else {
+                    alert("Error: Could not Connect. Please check spelling and try again")
+                }
+                });  
+
+        var displayAir = function(apiresponse, city) {
+            console.log((apiresponse));
+
+        //     //clear results
+            resultsContainerEl.textContent=''
+
+        //     // new container for info
+            var currentAirEl = document.createElement('article');
+            currentAirEl.id = 'current';
+            currentAirEl.classList = ''
+
+        //     // information to add to this div
+            var airQualityEl = document.createElement('p')
+
+        //     // the info from the data here should show up but is showing up as undefined
+        //     // data itself is showing up as [object Object]
+        //     // means that it is not being parsed from JSON appropriately - but where is it going wrong? 
+            airQualityEl.innerHTML = 'Right now the AQI in ' + city +' is ' + apiresponse.data.current.pollution.aqius;
+
+        //     //append there to currentAir section
+            currentAirEl.appendChild(airQualityEl);
+
+            resultsContainerEl.appendChild(currentAirEl);
+            var airColorEl = document.querySelector('#results');
+            if (parseInt(apiresponse.data.current.pollution.aqius) < 50 ) {
+                airColorEl.classList = 'good';
+            }
+            else if (parseInt(apiresponse.data.current.pollution.aqius) > 150) {
+                airColorEl.classList = 'unhealthy'
+            }
+            else {
+                airColorEl.classList = 'moderate'
+            }
+        }
+
+            
+    }
+        // end option 1
+
+        // function to update color of box depending on air quality - add in once function is working 
+            
+
+        // option 2 below
                 // .then((response) => {
                 //     if (response.ok) {
                 //         return response.json();
@@ -76,23 +132,8 @@
                 // .catch((error) => console.error("Fetch Error:", error))
                 // console.log(data);
                 // };
-        // end option 2 
 
-        //option 1 pt 1 
-                // below code returns success and city name but posts undefined 
-                .then(function(response) {
-                    if (response.ok) {
-                    response.json().then(function(data){
-                        // var current = data;
-                        displayAir(data, city)
-                    });
-                } else {
-                    alert("Error: Could not Connect. Please check spelling and try again")
-                }
-                });  
-        // option 1 pt 1 end
-
-        // option 2 part 2 below
+         // option 2 part 2 below
         // var displayAir = function(data) {
         //     var air = data;
         //     var aquiusDiv = document.getElementById("results");
@@ -109,50 +150,7 @@
         //     article.innerHTML = city;
         //     aquiusDiv.appendChild(cityEl);   
         // }
-
         // option 2 part 2 end 
 
-        // option 1 part 2 below
-        
-        var displayAir = function(data, city) {
-            console.log(data);
-
-        //     //clear results
-            resultsContainerEl.textContent=''
-
-        //     // new container for info
-            var currentAirEl = document.createElement('article');
-            currentAirEl.id = 'current';
-            currentAirEl.classList = ''
-
-        //     // information to add to this div
-            var airQualityEl = document.createElement('p')
-
-        //     // the info from the data here should show up but is showing up as undefined
-        //     // data itself is showing up as [object Object]
-        //     // means that it is not being parsed from JSON appropriately - but where is it going wrong? 
-            airQualityEl.innerHTML = 'The AQI in ' + city +' is ' + data.aqius;
-
-        //     //append there to currentAir section
-            currentAirEl.appendChild(airQualityEl);
-
-            resultsContainerEl.appendChild(currentAirEl);
-        }}
-
-        // function to update color of box depending on air quality - add in once function is working 
-            // var airColorEl = document.querySelector('#results');
-            // if (parseInt(data.aquius) < 50 ) {
-            //     airColorEl.classList = 'good';
-            // }
-            // else if (parseInt(data.aquius) > 150) {
-            //     airColorEl.classList = 'unhealthy'
-            // }
-            // else {
-            //     airColorEl.classList = 'moderate'
-            // }
-        // }
-
     
-        
-        
         searchFormEl.addEventListener('submit', formSubmitHandler);
