@@ -40,7 +40,7 @@ var getLatLon = function(city) {
             if (response.ok) {
                 response.json().then(function(data) {
                     // most recent search is store in local storage
-                    localStorage.setItem('last-search', data.name)
+                    localStorage.setItem('City', data.name)
                     var city = data.name;
                     var lat = data.coord.lat;
                     var lon = data.coord.lon;
