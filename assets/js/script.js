@@ -1,21 +1,9 @@
-// will need to have two submit boxes one for the city and one for the state
-// the submit boxes will store a variable that will then be pushed into the apikey
-// once the information is pushed through it will display the airquality on the screen 
-
-
-//API KEY NOTES
-// apikey 54cd8f0a-9f51-43d4-ad67-cb829c5298e2
-// docs https://api-docs.iqair.com/?version=latest
-// api url for specified city data 'http://api.airvisual.com/v2/city?city=' + city + '&state=' state + &country=USA&key= apikey 
-// temperature = current.weather.tp - displayed in celsisus. Can use (0°C × 9/5) + 32 = 32°F to change to fahrenheit
-// air quality = current.pollution.aqius =  airquality 
-// air quality rankings 0-50 = good/ green, 51-100 = moderate/ yellow, 101-150 = less unhealthy/ orange, 151-200 = unhealthy/ red, 201-300 = very unhealthy/ purple, 301 = hazardous/maroon
-
-
 var searchFormEl = document.querySelector('#search-form');
 var cityInputEl = document.querySelector('#city-input');
 var resultsContainerEl = document.querySelector('#results');
-
+// variables to hide and unhide results
+var alertBox = document.querySelector('#alert');
+var hideDrink = document.querySelector('#drink');
 
 // when search button is clicked - it finds input for that location
 var formSubmitHandler = function(event) {
@@ -25,7 +13,9 @@ var formSubmitHandler = function(event) {
         getLatLon(city);
         cityInputEl.value = '';
     } else {
-        alert('Please enter the name of a city');
+        //unhides message if not working
+        alertBox.classList = 'unhide'
+        hideDrink.classList = 'hide'
     }
 };
 
@@ -46,9 +36,15 @@ var getLatLon = function(city) {
                     var lon = data.coord.lon;
                     getAir(lat, lon, city);
                     console.log(lat, lon);
+                    // triggers on research to hide alert again and display drink if it was hidden
+                    alertBox.classList = 'hide'
+                    hideDrink.classList = 'unhide'
                 });
             } else {
-                alert('Error: No city Found. Please check spelling and try again.');
+                // unhides alert and makes sure drink doesnt pop up
+                alertBox.classList = 'unhide';
+                hideDrink.classList = 'hide'
+                
             }
         })
         .catch(function(error) {

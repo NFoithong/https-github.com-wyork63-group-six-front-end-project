@@ -101,3 +101,18 @@ h1.title {
     /* background-color: white; */
     padding: 0 50px;
 }
+
+/* class change for error message if nothing is entered and to hide drinks */
+
+#alert {
+    color: black;
+    text-shadow: 1px 1px 1px black;
+}
+
+.hide {
+    visibility: hidden;
+}
+
+.unhide {
+    visibility: 100%;
+}
