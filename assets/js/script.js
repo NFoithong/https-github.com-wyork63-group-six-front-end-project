@@ -1,21 +1,10 @@
-// will need to have two submit boxes one for the city and one for the state
-// the submit boxes will store a variable that will then be pushed into the apikey
-// once the information is pushed through it will display the airquality on the screen 
-
-
-//API KEY NOTES
-// apikey 54cd8f0a-9f51-43d4-ad67-cb829c5298e2
-// docs https://api-docs.iqair.com/?version=latest
-// api url for specified city data 'http://api.airvisual.com/v2/city?city=' + city + '&state=' state + &country=USA&key= apikey 
-// temperature = current.weather.tp - displayed in celsisus. Can use (0°C × 9/5) + 32 = 32°F to change to fahrenheit
-// air quality = current.pollution.aqius =  airquality 
-// air quality rankings 0-50 = good/ green, 51-100 = moderate/ yellow, 101-150 = less unhealthy/ orange, 151-200 = unhealthy/ red, 201-300 = very unhealthy/ purple, 301 = hazardous/maroon
-
-
 var searchFormEl = document.querySelector('#search-form');
 var cityInputEl = document.querySelector('#city-input');
 var resultsContainerEl = document.querySelector('#results');
-
+// variables to hide and unhide results
+var alertBox = document.querySelector('#alert');
+// var hideDrink = document.querySelector('#drink');
+var cities = []
 
 // when search button is clicked - it finds input for that location
 var formSubmitHandler = function(event) {
@@ -23,10 +12,17 @@ var formSubmitHandler = function(event) {
     var city = cityInputEl.value.trim();
     if (city) {
         getLatLon(city);
+        cities.unshift({ city });
         cityInputEl.value = '';
     } else {
-        alert('Please enter the name of a city');
+        //unhides message if not working - new 1/9 
+        alertBox.classList = 'unhide'
+        // hideDrink.classList = 'hide'
     }
+    saveSearch();
+};
+    var saveSearch = function () {
+        localStorage.setItem("cities", JSON.stringify(cities));
 };
 
 
@@ -45,10 +41,15 @@ var getLatLon = function(city) {
                     var lat = data.coord.lat;
                     var lon = data.coord.lon;
                     getAir(lat, lon, city);
-                    console.log(lat, lon);
+                    // triggers on research to hide alert again and display drink if it was hidden new1 1-9
+                    alertBox.classList = 'hide'
+                    // hideDrink.classList = 'unhide'
                 });
             } else {
-                alert('Error: No city Found. Please check spelling and try again.');
+                // unhides alert and makes sure drink doesnt pop up
+                alertBox.classList = 'unhide';
+                // hideDrink.classList = 'hide'
+                
             }
         })
         .catch(function(error) {
@@ -58,14 +59,11 @@ var getLatLon = function(city) {
 };
 
 // lat and lon are taken and plugged into air api 
-
 var getAir = function(lat, lon, city) {
     var apiKey2 = '54cd8f0a-9f51-43d4-ad67-cb829c5298e2';
     var apiUrl2 = 'https://api.airvisual.com/v2/nearest_city?lat=' + lat + '&lon=' + lon + '&key=' + apiKey2;
     fetch(apiUrl2)
-
-    //option 1 pt 1 
-    // below code returns success and city name but posts undefined 
+    // code to return the air quality 
     .then(function(response) {
         if (response.ok) {
             response.json().then(function(apiresponse) {
@@ -79,14 +77,19 @@ var getAir = function(lat, lon, city) {
     var displayAir = function(apiresponse, city) {
 
         console.log((apiresponse));
-
-        //     //clear results
+        //clear results
         resultsContainerEl.textContent = ''
 
-        //     // new container for info
+        // new container for info
         var currentAirEl = document.createElement('article');
         currentAirEl.id = 'current';
         currentAirEl.classList = ''
+
+        // information to add to this div
+        var airQualityEl = document.createElement('p')
+
+        //append there to currentAir section
+        currentAirEl.appendChild(airQualityEl);
 
         // create new div-class time
         var divTime = document.createElement('div');
@@ -141,30 +144,8 @@ var getAir = function(lat, lon, city) {
 
 
 
-        //     // information to add to this div
-        // var airQualityEl = document.createElement('p')
-
-        //     // the info from the data here should show up but is showing up as undefined
-        //     // data itself is showing up as [object Object]
-        //     // means that it is not being parsed from JSON appropriately - but where is it going wrong? 
-        // airQualityEl.innerHTML = 'Right now the AQI in ' + city + ' is ' + apiresponse.data.current.pollution.aqius;
-
-        //     //append there to currentAir section
-        // currentAirEl.appendChild(airQualityEl);
-
-
-        // resultsContainerEl.appendChild(currentAirEl);
-        // var airColorEl = document.querySelector('#results');
-        // if (parseInt(apiresponse.data.current.pollution.aqius) < 50) {
-        //     airColorEl.classList = 'good';
-
-        // } else
-        // if (parseInt(apiresponse.data.current.pollution.aqius) > 150) {
-        //     airColorEl.classList = 'unhealthy';
-        // } else {
-        //     airColorEl.classList = 'moderate';
-        // }
-
+        
+        // function to change color of result depending on level of airquality
         resultsContainerEl.appendChild(currentAirEl);
         var airColorEl = document.querySelector('.aqi');
         if (parseInt(apiresponse.data.current.pollution.aqius) < 50) {
@@ -178,7 +159,5 @@ var getAir = function(lat, lon, city) {
         }
     }
 }
-
-
 
 searchFormEl.addEventListener('submit', formSubmitHandler);

@@ -26,3 +26,19 @@
 .aqi.unhealthy {
     border: 8px solid #ED5500;
 }
+
+
+/* class change for error message if nothing is entered and to hide drinks */
+
+#alert {
+    color: black;
+    text-shadow: 1px 1px 1px black;
+}
+
+.hide {
+    visibility: hidden;
+}
+
+.unhide {
+    visibility: 100%;
+}
