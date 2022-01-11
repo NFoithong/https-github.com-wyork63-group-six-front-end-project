@@ -6,38 +6,249 @@
     font-family: "Open sans", san-serif;
 }
 
-#dashBoard {
-    width: 35%;
+
+/* Dashboard */
+
+.col1 {
+    width: 35vw;
+    z-index: 1;
     height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+#dashBoard {
+    width: 100%;
+    /* height: 100%; */
     color: #ffffff;
     background: linear-gradient(45deg, #6622F8, #ED5500);
     /* opacity: 70%; */
-    position: fixed;
-    border-radius: 0 30px 30px 0;
+    position: relative;
+    /* border-radius: 0 30px 30px 0; */
     box-shadow: 10px 0px rgb(0 0 0 / 0.1);
 }
 
 section {
-    padding: 0 50px 0 50px;
+    padding: 0 75px 0 75px;
 }
 
 h1 {
     font-weight: 600!important;
-    font-size: 3rem;
+    font-size: 7rem;
     color: #ffffff;
+    line-height: 7rem;
 }
 
 .air-quality {
     font-size: 1.25rem;
+    line-height: 2rem;
     /* letter-spacing: 0.25rem; */
 }
 
 .brand {
     font-family: "Open sans", san-serif;
     margin-top: 100px;
-    padding: 0 50px 0 50px;
+    padding: 0 75px 0 75px;
 }
 
 .label {
     color: #ffffff;
+}
+
+button {
+    width: 150px;
+}
+
+.btn {
+    position: absolute;
+    right: 0;
+    padding-right: 75px;
+}
+
+.is-normal {
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px solid #ffffff;
+    box-shadow: none;
+}
+
+.is-normal:focus {
+    border: 0;
+    border-bottom: 2px solid #ffffff;
+    color: #ffffff;
+    box-shadow: none;
+}
+
+.is-normal::placeholder {
+    color: #ffffff;
+}
+
+
+/* Data section  */
+
+
+/* divtime */
+
+.time {
+    color: #ffffff;
+    /* margin: 0 auto; */
+}
+
+h2 {
+    font-size: 3rem;
+    line-height: 3.5rem;
+}
+
+.currentTime,
+.curCity {
+    font-size: 2rem;
+}
+
+
+/* div data */
+
+.aqi {
+    width: 250px;
+    height: 250px;
+    color: #ffffff;
+    border: 8px solid #ffffff;
+    border-radius: 50%;
+    box-shadow: 5px 5px rgb(0 0 0 / 0.4);
+    margin-top: 10%;
+    text-align: center;
+}
+
+.aqiData {
+    font-size: 6rem;
+    margin: 0 auto;
+    padding-top: 25%
+}
+
+.aqi-us {
+    font-size: 3rem;
+    line-height: 6rem;
+}
+
+
+/* 
+.currenTime {
+    font-family: "Open sans", san-serif;
+    font-size: 1.25rem;
+    color: #ffffff;
+    padding: 0 75px;
+    position: absolute;
+    bottom: 20px;
+} */
+
+
+/* Drink section  */
+
+.col2 {
+    width: 65vw;
+    height: auto;
+    margin: 0 auto;
+    /* padding: 100px 100px 0; */
+    text-align: left;
+}
+
+h3 {
+    font-family: "Open sans", san-serif;
+    font-size: 3rem;
+    font-weight: 600;
+    margin: 0 auto;
+    line-height: 3rem;
+    background-color: #000000;
+    color: #ffffff;
+    padding: 20px 0 20px 150px;
+    width: 100%;
+}
+
+#drink img {
+    width: 100%;
+    height: 850px;
+    object-fit: cover;
+}
+
+ol {
+    font-family: "Open sans", san-serif;
+    font-weight: lighter;
+    font-size: 1.25rem;
+    margin-top: 20px;
+    line-height: 2rem;
+    padding: 0 150px;
+}
+
+ol li {
+    text-indent: 30px;
+    margin-left: 20px;
+}
+
+
+/* Responsive screen device */
+
+
+/* Laptop device */
+
+@media screen and (max-width: 985px) {
+    #dashBoard {
+        transition-duration: 0.35s;
+    }
+    .brand h1 {
+        font-size: 4rem;
+        line-height: 1.25;
+        transition-duration: 0.35s;
+    }
+    #result {
+        font-size: 2rem;
+    }
+    #drink img {
+        height: 750px;
+    }
+    h3 {
+        padding: 20px 90px;
+    }
+    ol,
+    li {
+        padding: 0 90px;
+        padding-right: 50px;
+    }
+    ol li {
+        text-indent: -65px;
+    }
+}
+
+
+/* mobile device */
+
+@media screen and (max-width: 768px) {
+    #dashBoard {
+        border-radius: 0;
+        box-shadow: none;
+        transition-duration: 0.35s;
+        height: 100%;
+    }
+    .col1 {
+        width: 100%;
+        /* height: 100%; */
+        transition-duration: 0.35s;
+    }
+    .brand h1 {
+        font-size: 7rem;
+    }
+    .is-flex-direction-row {
+        flex-direction: column;
+    }
+    .col2 {
+        width: 100%;
+        transition-duration: 0.35s;
+    }
+    #drink img {
+        height: auto;
+    }
+    h3 {
+        padding: 20px 90px;
+    }
+    li:last-child {
+        margin-bottom: 50px;
+    }
 }

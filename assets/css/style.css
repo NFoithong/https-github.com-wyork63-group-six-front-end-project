@@ -63,41 +63,24 @@ h1.title {
     }
 } */
 
-#drink img {
-    width: 30%;
-    height: auto;
-}
-
-;
 #results {
     /* background-color: goldenrod; */
-    padding: 0 50px;
+    padding: 0 75px;
+    margin: 15px 0 80px 0;
+    position: absolute;
 }
 
 
 /** change color depending on result of AQIUS **/
 
-#results.good {
-    /* background-color: green; */
-    color: #00DF59;
-    font-size: 3rem;
-    text-shadow: 2px 2px 5px black;
-    /* background-color: white; */
-    padding: 0 50px;
+.aqi.good {
+    border: 8px solid green;
 }
 
-#results.moderate {
-    color: #FFDC00;
-    font-size: 3rem;
-    text-shadow: 2px 2px 5px black;
-    /* background-color: white; */
-    padding: 0 50px;
+.aqi.moderate {
+    border: 8px solid yellow;
 }
 
-#results.unhealthy {
-    color: #f91C1C;
-    font-size: 3rem;
-    text-shadow: 2px 2px 5px black;
-    /* background-color: white; */
-    padding: 0 50px;
+.aqi.unhealthy {
+    border: 8px solid red;
 }

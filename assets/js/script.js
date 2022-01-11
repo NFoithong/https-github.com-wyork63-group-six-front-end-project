@@ -77,6 +77,7 @@ var getAir = function(lat, lon, city) {
     });
 
     var displayAir = function(apiresponse, city) {
+
         console.log((apiresponse));
 
         //     //clear results
@@ -87,28 +88,97 @@ var getAir = function(lat, lon, city) {
         currentAirEl.id = 'current';
         currentAirEl.classList = ''
 
+        // create new div-class time
+        var divTime = document.createElement('div');
+        divTime.className = 'time';
+        divTime.innerHTML = '';
+
+        currentAirEl.appendChild(divTime);
+
+        // create h2-date
+        var date = document.createElement('h2');
+        var todayDate = moment().format('dddd MMMM Do YYYY');
+        date.className = 'currentDate';
+        date.innerHTML = todayDate;
+
+        divTime.appendChild(date);
+
+        // create p-current time
+        var todayTime = document.createElement('p');
+        var curTime = moment().format('LTS');
+        todayTime.className = 'currentTime';
+        todayTime.innerHTML = curTime;
+
+        divTime.appendChild(todayTime);
+
+        // create p-city
+        var cityName = document.createElement('p');
+        cityName.className = 'curCity';
+        cityName.innerHTML = city;
+
+        divTime.appendChild(cityName);
+
+        // create div-class aqiData
+        var aqiData = document.createElement('div');
+        aqiData.className = 'aqi';
+        aqiData.innerHTML = '';
+
+        currentAirEl.appendChild(aqiData);
+
+        // create h2-data
+        var dataNumber = document.createElement('h2');
+        dataNumber.className = 'aqiData';
+        dataNumber.innerHTML = apiresponse.data.current.pollution.aqius;
+
+        aqiData.appendChild(dataNumber);
+
+        // create p-aqi
+        var usAqi = document.createElement('span');
+        usAqi.className = 'aqi-us';
+        usAqi.innerHTML = 'AQI';
+
+        aqiData.appendChild(usAqi);
+
+
+
         //     // information to add to this div
-        var airQualityEl = document.createElement('p')
+        // var airQualityEl = document.createElement('p')
 
         //     // the info from the data here should show up but is showing up as undefined
         //     // data itself is showing up as [object Object]
         //     // means that it is not being parsed from JSON appropriately - but where is it going wrong? 
-        airQualityEl.innerHTML = 'Right now the AQI in ' + city + ' is ' + apiresponse.data.current.pollution.aqius;
+        // airQualityEl.innerHTML = 'Right now the AQI in ' + city + ' is ' + apiresponse.data.current.pollution.aqius;
 
         //     //append there to currentAir section
-        currentAirEl.appendChild(airQualityEl);
+        // currentAirEl.appendChild(airQualityEl);
+
+
+        // resultsContainerEl.appendChild(currentAirEl);
+        // var airColorEl = document.querySelector('#results');
+        // if (parseInt(apiresponse.data.current.pollution.aqius) < 50) {
+        //     airColorEl.classList = 'good';
+
+        // } else
+        // if (parseInt(apiresponse.data.current.pollution.aqius) > 150) {
+        //     airColorEl.classList = 'unhealthy';
+        // } else {
+        //     airColorEl.classList = 'moderate';
+        // }
 
         resultsContainerEl.appendChild(currentAirEl);
-        var airColorEl = document.querySelector('#results');
+        var airColorEl = document.querySelector('.aqi');
         if (parseInt(apiresponse.data.current.pollution.aqius) < 50) {
-            airColorEl.classList = 'good';
-        } else if (parseInt(apiresponse.data.current.pollution.aqius) > 150) {
-            airColorEl.classList = 'unhealthy'
+            airColorEl.classList.add('good');
+
+        } else
+        if (parseInt(apiresponse.data.current.pollution.aqius) > 150) {
+            airColorEl.classList.add('unhealthy');
         } else {
-            airColorEl.classList = 'moderate'
+            airColorEl.classList.add('moderate');
         }
     }
 }
+
 
 
 searchFormEl.addEventListener('submit', formSubmitHandler);
