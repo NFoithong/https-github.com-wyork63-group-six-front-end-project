@@ -20,8 +20,20 @@ function getDrinks() {
     });
 }
 
+
+
 function displayDrink(cocktail) {
   console.log(cocktail.drinks[0]);
+
+  var saveDrink = [(cocktail.drinks[0].strDrink)];
+  var drinkPast = () => {
+    localStorage.setItem("drinks", saveDrink);
+  };
+
+
+  drinkPast();
+  
+ 
 
   //clears previous drink
   const resultsContainerEl = document.querySelector("#drink");
@@ -58,11 +70,6 @@ function displayDrink(cocktail) {
       cocktail.drinks[0][`strIngredient${i}`];
     instruction.appendChild(ingredient);
   }
-  const saveDrinks = () => {
-    localStorage.setItem("Drink", cocktail.drinks[0].strDrink);
-    localStorage.setItem("Instructions", cocktail.drinks[0].strInstructions);
-  };
-  saveDrinks();
 }
 
 searchFormEl.addEventListener("submit", getDrinks);
