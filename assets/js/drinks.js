@@ -20,20 +20,9 @@ function getDrinks() {
     });
 }
 
-
-
 function displayDrink(cocktail) {
   console.log(cocktail.drinks[0]);
 
-  var saveDrink = [(cocktail.drinks[0].strDrink)];
-  var drinkPast = () => {
-    localStorage.setItem("drinks", saveDrink);
-  };
-
-
-  drinkPast();
-  
- 
 
   //clears previous drink
   const resultsContainerEl = document.querySelector("#drink");
