@@ -27,17 +27,19 @@ function displayDrink(cocktail) {
 
     resultsContainerEl.textContent = ''
 
-    //Displays drink name
     const drinkSection = document.querySelector("#drink");
-    const drinkName = document.createElement("h3");
-    drinkName.innerHTML = cocktail.drinks[0].strDrink;
-
-    drinkSection.appendChild(drinkName);
 
     //Displays drink image
     const img = document.createElement("img");
     img.src = cocktail.drinks[0].strDrinkThumb;
     drinkSection.appendChild(img);
+
+
+    //Displays drink name
+    const drinkName = document.createElement("h3");
+    drinkName.innerHTML = cocktail.drinks[0].strDrink;
+
+    drinkSection.appendChild(drinkName);
 
     //Displays the ingredient and the instruction to make drink
     const instruction = document.createElement("ol");
