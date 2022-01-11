@@ -3,7 +3,7 @@ var cityInputEl = document.querySelector('#city-input');
 var resultsContainerEl = document.querySelector('#results');
 // variables to hide and unhide results
 var alertBox = document.querySelector('#alert');
-var hideDrink = document.querySelector('#drink');
+// var hideDrink = document.querySelector('#drink');
 var cities = []
 
 // when search button is clicked - it finds input for that location
@@ -17,7 +17,7 @@ var formSubmitHandler = function(event) {
     } else {
         //unhides message if not working - new 1/9 
         alertBox.classList = 'unhide'
-        hideDrink.classList = 'hide'
+        // hideDrink.classList = 'hide'
     }
     saveSearch();
 };
@@ -41,15 +41,14 @@ var getLatLon = function(city) {
                     var lat = data.coord.lat;
                     var lon = data.coord.lon;
                     getAir(lat, lon, city);
-                    console.log(lat, lon);
                     // triggers on research to hide alert again and display drink if it was hidden new1 1-9
                     alertBox.classList = 'hide'
-                    hideDrink.classList = 'unhide'
+                    // hideDrink.classList = 'unhide'
                 });
             } else {
                 // unhides alert and makes sure drink doesnt pop up
                 alertBox.classList = 'unhide';
-                hideDrink.classList = 'hide'
+                // hideDrink.classList = 'hide'
                 
             }
         })
@@ -60,7 +59,6 @@ var getLatLon = function(city) {
 };
 
 // lat and lon are taken and plugged into air api 
-
 var getAir = function(lat, lon, city) {
     var apiKey2 = '54cd8f0a-9f51-43d4-ad67-cb829c5298e2';
     var apiUrl2 = 'https://api.airvisual.com/v2/nearest_city?lat=' + lat + '&lon=' + lon + '&key=' + apiKey2;
@@ -92,7 +90,7 @@ var getAir = function(lat, lon, city) {
 
         //append there to currentAir section
         currentAirEl.appendChild(airQualityEl);
-        
+
         // create new div-class time
         var divTime = document.createElement('div');
         divTime.className = 'time';
