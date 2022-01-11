@@ -4,6 +4,7 @@ var resultsContainerEl = document.querySelector('#results');
 // variables to hide and unhide results
 var alertBox = document.querySelector('#alert');
 var hideDrink = document.querySelector('#drink');
+var cities = []
 
 // when search button is clicked - it finds input for that location
 var formSubmitHandler = function(event) {
@@ -11,12 +12,17 @@ var formSubmitHandler = function(event) {
     var city = cityInputEl.value.trim();
     if (city) {
         getLatLon(city);
+        cities.unshift({ city });
         cityInputEl.value = '';
     } else {
         //unhides message if not working - new 1/9 
         alertBox.classList = 'unhide'
         hideDrink.classList = 'hide'
     }
+    saveSearch();
+};
+    var saveSearch = function () {
+        localStorage.setItem("cities", JSON.stringify(cities));
 };
 
 
