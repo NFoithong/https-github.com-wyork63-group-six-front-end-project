@@ -6,39 +6,58 @@
 }
 
 #results {
-    /* background-color: goldenrod; */
     padding: 0 75px;
-    margin: 15px 0 80px 0;
-    position: absolute;
+    position: relative;
 }
 
 
 /** change color depending on result of AQIUS **/
 
 .aqi.good {
-    border: 8px solid #00A441;
+    border: 15px solid #00DF59;
 }
 
 .aqi.moderate {
-    border: 8px solid #FFDC00;
+    border: 15px solid #FFDC00;
 }
 
 .aqi.unhealthy {
-    border: 8px solid #ED5500;
+    border: 15px solid #ED5500;
 }
 
 
 /* class change for error message if nothing is entered and to hide drinks */
 
 #alert {
-    color: black;
-    text-shadow: 1px 1px 1px black;
+    color: #ffffff;
+    position: fixed;
 }
 
 .hide {
     visibility: hidden;
 }
 
+.hide {
+    opacity: 0;
+}
+
 .unhide {
     visibility: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    margin-top: 100px;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 25%;
+    border-radius: 15px;
+    position: fixed;
+    z-index: 3;
+    font-family: "Open sans", san-serif;
+    font-size: 1.2rem;
+    transition: ease-in-out 0.5s;
+}
+
+@media screen and (max-width: 768px) {
+    .unhide {
+        width: 70%;
+    }
 }
