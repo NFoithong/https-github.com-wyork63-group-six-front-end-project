@@ -3,7 +3,6 @@ var cityInputEl = document.querySelector('#city-input');
 var resultsContainerEl = document.querySelector('#results');
 // variables to hide and unhide results
 var alertBox = document.querySelector('#alert');
-// var hideDrink = document.querySelector('#drink');
 var cities = []
 
 
@@ -18,7 +17,6 @@ var formSubmitHandler = function(event) {
     } else {
         //unhides message if not working - new 1/9 
         alertBox.classList = 'unhide'
-            // hideDrink.classList = 'hide'
 
     }
     saveSearch();
@@ -45,12 +43,12 @@ var getLatLon = function(city) {
                     getAir(lat, lon, city);
                     // triggers on research to hide alert again and display drink if it was hidden new1 1-9
                     alertBox.classList = 'hide'
-                        // hideDrink.classList = 'unhide'
+                        
                 });
             } else {
-                // unhides alert and makes sure drink doesnt pop up
+                // unhides alert 
                 alertBox.classList = 'unhide';
-                // hideDrink.classList = 'hide'
+                
 
             }
         })
@@ -127,7 +125,7 @@ var getAir = function(lat, lon, city) {
 
         var indexDesc = document.createElement('p');
         indexDesc.className = 'desc';
-        // indexDesc.innerHTML = '';
+        
 
         uvIndex.appendChild(indexDesc);
 
@@ -156,16 +154,16 @@ var getAir = function(lat, lon, city) {
 
         if (parseInt(apiresponse.data.current.pollution.aqius) < 50) {
             airColorEl.classList.add('good');
-            indexDesc.innerHTML = "This AQI is <b>GOOD</b>! <br>Let's go out for party!";
+            indexDesc.innerHTML = "This AQI is <b>GOOD</b>! <br>Let's go out and party!";
 
         } else
         if (parseInt(apiresponse.data.current.pollution.aqius) > 150) {
             airColorEl.classList.add('unhealthy');
-            indexDesc.innerHTML = "This AQI is <b>UNHEALTHY</b>! <br>Stay home and relax with your homemade drink!.";
+            indexDesc.innerHTML = "This AQI is <b>UNHEALTHY</b>! <br>Stay home and relax with your homemade drink!";
 
         } else {
             airColorEl.classList.add('moderate');
-            indexDesc.innerHTML = "This AQI is <b>MODERATE</b>! <br>Considering before going out!";
+            indexDesc.innerHTML = "This AQI is <b>MODERATE</b>! <br>Consider before going out!";
 
         }
     }
@@ -181,8 +179,6 @@ function fun() {
     } else {
         dashBoard.style.height = h;
     }
-    // return false;
-
 }
 
 searchFormEl.addEventListener('submit', formSubmitHandler);

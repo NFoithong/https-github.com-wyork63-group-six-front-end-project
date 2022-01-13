@@ -59,9 +59,6 @@ function displayDrink(cocktail) {
             cocktail.drinks[0][`strIngredient${i}`];
         instruction.appendChild(ingredient);
     }
-    // const instruction = document.createElement("ol");
-    // instruction.innerHTML = cocktail.drinks[0].strInstructions;
-    // drinkSection.appendChild(instruction);
 }
 
 
